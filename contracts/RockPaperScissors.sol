@@ -3,7 +3,8 @@
 pragma solidity ^0.8.0;
 
 contract RockPaperScissors {
-
+    Using SafeMath for uint256;
+    
     enum GameStatus { OPEN, READY, CLOSED, DONE }
 
     struct Game {
