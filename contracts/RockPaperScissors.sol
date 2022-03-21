@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 import "./SafeMath.sol";
 
 contract RockPaperScissors {
-    Using SafeMath for uint256;
+    using SafeMath for uint256;
     
     enum GameStatus { OPEN, READY, CLOSED, DONE }
 
