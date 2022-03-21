@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.0;
 
+import SafeMath from "./SafeMath.sol";
+
 contract RockPaperScissors {
     Using SafeMath for uint256;
     
