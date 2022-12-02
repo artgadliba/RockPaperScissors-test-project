@@ -171,11 +171,12 @@ contract RockPaperScissors {
     // @param move - players move, used previously to generate hashed secret move (should match last submitted move in game)
     // @param seed - players seed phrase, used previously to generate hashed secret move (should match seed phrase used to submit last move in game)
     function revealMove(uint256 gameId, uint256 move, string memory seed) external bothMovesSubmited(gameId) _onlyPlayer(gameId) {
-        bytes32 secretMove = getSecret(move, seed);
+        require(secretMove == games[gameId].playerSecretMove[msg.sender], "You are trying to reveal wrong secret move");
+        
+        bytes32 revealedMove = getSecret(move, seed);
         address opponent = getOpponent(gameId, msg.sender);
 
-        require(secretMove == games[gameId].playerSecretMove[msg.sender], "You are trying to reveal wrong secret move");
-        games[gameId].playerRevealedMove[msg.sender] = move;
+        games[gameId].playerRevealedMove[msg.sender] = revealedMove;
         games[gameId].timer = block.timestamp; // Set new value to timer then move revealed to provide extra time
 
         emit moveRevealed(gameId, msg.sender, move);
